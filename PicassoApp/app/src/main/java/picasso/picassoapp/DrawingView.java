@@ -12,7 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.MotionEvent;
 
-import picasso.picassoapp.models.Cordinates;
+import picasso.picassoapp.models.Coordinates;
 import picasso.picassoapp.models.Drawing;
 
 /**
@@ -83,15 +83,9 @@ public class DrawingView extends View
         //detect user touch
         float touchX = event.getX();
         float touchY = event.getY();
-        //TODO: SAVE COORDINATES HERE AND FIND A WAY TO ACCESS IT ON THE MAIN ACTIVITY
-        saved.addCord(new Cordinates(touchX,touchY));
-        //okay this is the tricky part, FROM THIS I HAVE TO GET ARRAY OF COORDINATES
-        // YEAH I KNOW FUCK MY LIFE, but i have to do this properly, so probably retrofit will go
-        // here RIP ME LOL
-        //okay i found something interesting that ill try later
-        //basically i have my array right?
-        // everytime i get an event i get the coordinates so before i do drawPath.lineTo
-        // i save those coordinates
+        //TODO: IMPLEMENT A REAL TIME SENDING OF THE COORDINATES
+        //IT IS RECOMENDED TO USE RETROFIT HERE FOR THAT CASE   
+        saved.addCord(new Coordinates(touchX,touchY));
         switch (event.getAction())
         {
             case MotionEvent.ACTION_DOWN:

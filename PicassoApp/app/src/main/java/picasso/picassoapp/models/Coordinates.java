@@ -3,18 +3,18 @@ package picasso.picassoapp.models;
 /**
  * Created by jl on 4/5/16.
  */
-public class Cordinates
+public class Coordinates
 {
     private float x;
     private float y;
 
-    public Cordinates()
+    public Coordinates()
     {
         this.x=0;
         this.y=0;
     }
 
-    public Cordinates(float x, float y)
+    public Coordinates(float x, float y)
     {
         this.x = x;
         this.y = y;

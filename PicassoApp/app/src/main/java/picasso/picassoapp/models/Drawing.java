@@ -9,18 +9,18 @@ import java.util.List;
 public class Drawing
 {
     private String name;
-    private List<Cordinates> cord;
+    private List<Coordinates> coord;
 
     public Drawing()
     {
         name = "";
-        cord = new ArrayList<>();
+        coord = new ArrayList<>();
     }
 
     public void copyDrawing(Drawing copy)
     {
         this.name = copy.getName();
-        this.cord = copy.getCord();
+        this.coord = copy.getCord();
     }
 
     public void setName(String name)
@@ -33,18 +33,18 @@ public class Drawing
         return this.name;
     }
 
-    public void setCoord(List<Cordinates> coord)
+    public void setCoord(List<Coordinates> coord)
     {
-        this.cord = coord;
+        this.coord = coord;
     }
 
-    public List<Cordinates> getCord()
+    public List<Coordinates> getCord()
     {
-        return this.cord;
+        return this.coord;
     }
 
-    public void addCord(Cordinates xy)
+    public void addCord(Coordinates xy)
     {
-        cord.add(xy);
+        coord.add(xy);
     }
 }

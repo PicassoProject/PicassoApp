@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     private ImageButton saveButton;
     private TextView text;
 
-    //TODO: OBTAIN THE DRAWINGS THROUGH THE drawView AND SEND THEM, ALSO FIND A WAY TO CLEAR THE DRAWING
+    //TODO: FIND A WAY TO CLEAR THE DRAWING
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 String API = "https://infinite-brushlands-67485.herokuapp.com";
-                String name = "IT DID RETURN";
+                //TODO: MAKE IT SO THAT THE USER CAN CHOOSE THE NAME, ALSO SO THAT YOU CAN CHANGE THE NAME IF IT FAILED ONCE
+                String name = "name2";
                 Drawing retroSend = new Drawing();
                 retroSend.copyDrawing(drawView.saved);
                 retroSend.setName(name);
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity
                 api.postDrawing(retroSend, new Callback<CallbackJson>() {
                     @Override
                     public void success(CallbackJson json, Response response) {
-                        text.setText(json.getCordinates());
+                        text.setText(json.getStatus());
                         //it worked
                     }
 
@@ -82,8 +83,6 @@ public class MainActivity extends AppCompatActivity
 
                     }
                 });
-
-                //TODO: SEND STUFF THROUGH RETROFIT HERE!!!!
             }
         });
     }

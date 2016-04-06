@@ -12,6 +12,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.MotionEvent;
 
+import picasso.picassoapp.models.Cordinates;
+import picasso.picassoapp.models.Drawing;
+
 /**
  * Created by jl on 3/9/16.
  */
@@ -27,6 +30,8 @@ public class DrawingView extends View
     private Canvas drawCanvas;
     //canvas bitmap
     private Bitmap canvasBitmap;
+    //the drawing that will be sent
+    public Drawing saved;
 
     public DrawingView(Context context, AttributeSet attribute)
     {
@@ -50,6 +55,9 @@ public class DrawingView extends View
 
         //instantiating canvas paint object
         canvasPaint = new Paint(Paint.DITHER_FLAG);
+
+        //setup the saved drawing
+        saved = new Drawing();
     }
 
     @Override
@@ -75,6 +83,8 @@ public class DrawingView extends View
         //detect user touch
         float touchX = event.getX();
         float touchY = event.getY();
+        //TODO: SAVE COORDINATES HERE AND FIND A WAY TO ACCESS IT ON THE MAIN ACTIVITY
+        saved.addCord(new Cordinates(touchX,touchY));
         //okay this is the tricky part, FROM THIS I HAVE TO GET ARRAY OF COORDINATES
         // YEAH I KNOW FUCK MY LIFE, but i have to do this properly, so probably retrofit will go
         // here RIP ME LOL

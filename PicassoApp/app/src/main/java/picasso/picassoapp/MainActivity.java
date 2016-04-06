@@ -10,12 +10,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import picasso.picassoapp.API.DrawingAPI;
+import picasso.picassoapp.models.CallbackJson;
+import picasso.picassoapp.models.Drawing;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity
 {
     private DrawingView drawView;
     private ImageButton currPaint;
+    private ImageButton saveButton;
+    private TextView text;
 
+    //TODO: OBTAIN THE DRAWINGS THROUGH THE drawView AND SEND THEM, ALSO FIND A WAY TO CLEAR THE DRAWING
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,6 +36,8 @@ public class MainActivity extends AppCompatActivity
 
         //this instantiates our drawing view class on our actual gui view named drawing in this case
         drawView = (DrawingView)findViewById(R.id.drawing);
+        saveButton = (ImageButton)findViewById(R.id.save_btn);
+        text = (TextView) findViewById(R.id.RESPONSE);
 
         //retrieves the first paint color thingy
         LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
@@ -41,7 +55,39 @@ public class MainActivity extends AppCompatActivity
             currPaint.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.paint_pressed));
 
         }
+
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                String API = "https://infinite-brushlands-67485.herokuapp.com";
+                String name = "IT DID RETURN";
+                Drawing retroSend = new Drawing();
+                retroSend.copyDrawing(drawView.saved);
+                retroSend.setName(name);
+                RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(API).build();
+                DrawingAPI api;
+                api = restAdapter.create(DrawingAPI.class);
+                api.postDrawing(retroSend, new Callback<CallbackJson>() {
+                    @Override
+                    public void success(CallbackJson json, Response response) {
+                        text.setText(json.getCordinates());
+                        //it worked
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        //it failed
+                        text.setText("it failed");
+
+                    }
+                });
+
+                //TODO: SEND STUFF THROUGH RETROFIT HERE!!!!
+            }
+        });
     }
+
 
     public void paintClicked(View view)
     {

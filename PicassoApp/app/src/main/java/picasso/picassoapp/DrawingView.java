@@ -84,7 +84,7 @@ public class DrawingView extends View
         float touchX = event.getX();
         float touchY = event.getY();
         //TODO: IMPLEMENT A REAL TIME SENDING OF THE COORDINATES
-        //IT IS RECOMENDED TO USE RETROFIT HERE FOR THAT CASE   
+        //IT IS RECOMENDED TO USE RETROFIT HERE FOR THAT CASE
         saved.addCord(new Coordinates(touchX,touchY));
         switch (event.getAction())
         {

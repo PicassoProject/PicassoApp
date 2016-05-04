@@ -47,4 +47,9 @@ public class Drawing
     {
         coord.add(xy);
     }
+
+    public void delete()
+    {
+        coord = new ArrayList<>();
+    }
 }

@@ -39,7 +39,7 @@ public class DrawingView extends View
         setupDrawing();
     }
 
-    private void setupDrawing()
+    public void setupDrawing()
     {
         //get drawing area setup for interaction
         drawPath = new Path();
@@ -58,6 +58,8 @@ public class DrawingView extends View
 
         //setup the saved drawing
         saved = new Drawing();
+
+
     }
 
     @Override
@@ -104,6 +106,14 @@ public class DrawingView extends View
 
         invalidate();
         return true;
+    }
+
+    public void deleteEverything()
+    {
+        saved.delete();
+        //draws the whole canvas white again
+        drawCanvas.drawColor(Color.WHITE);
+        invalidate();  
     }
 
     public void setColor(String newColor)

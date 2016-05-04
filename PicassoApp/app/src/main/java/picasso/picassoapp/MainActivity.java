@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity
     private DrawingView drawView;
     private ImageButton currPaint;
     private ImageButton saveButton;
+    private ImageButton delButton;
     private TextView text;
 
     //TODO: FIND A WAY TO CLEAR THE DRAWING
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity
 
         //this instantiates our drawing view class on our actual gui view named drawing in this case
         drawView = (DrawingView)findViewById(R.id.drawing);
+        delButton = (ImageButton)findViewById(R.id.erase_btn);
         saveButton = (ImageButton)findViewById(R.id.save_btn);
+
         text = (TextView) findViewById(R.id.RESPONSE);
 
         //retrieves the first paint color thingy
@@ -53,9 +56,15 @@ public class MainActivity extends AppCompatActivity
         else
         {
             currPaint.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.paint_pressed));
-
         }
 
+        delButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                drawView.deleteEverything();
+            }
+        });
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
@@ -111,8 +120,6 @@ public class MainActivity extends AppCompatActivity
             }
             currPaint=(ImageButton)view;
         }
-
-
 
     }
 }

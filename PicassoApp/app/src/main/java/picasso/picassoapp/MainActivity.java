@@ -1,5 +1,7 @@
 package picasso.picassoapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +9,10 @@ import android.os.Bundle;
 //import android.os.Build.VERSION;
 
 //app imports
+import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     private ImageButton saveButton;
     private ImageButton delButton;
     private TextView text;
+    private String name;
 
     //TODO: FIND A WAY TO CLEAR THE DRAWING
     @Override
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         //this instantiates our drawing view class on our actual gui view named drawing in this case
         drawView = (DrawingView)findViewById(R.id.drawing);
         delButton = (ImageButton)findViewById(R.id.erase_btn);
@@ -69,9 +77,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                obtainName();
                 String API = "https://infinite-brushlands-67485.herokuapp.com";
                 //TODO: MAKE IT SO THAT THE USER CAN CHOOSE THE NAME, ALSO SO THAT YOU CAN CHANGE THE NAME IF IT FAILED ONCE
-                String name = "name2";
+                name = "name2";
                 Drawing retroSend = new Drawing();
                 retroSend.copyDrawing(drawView.saved);
                 retroSend.setName(name);
@@ -96,6 +105,32 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
+
+    public void obtainName()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Title");
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                name = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+    }
 
     public void paintClicked(View view)
     {

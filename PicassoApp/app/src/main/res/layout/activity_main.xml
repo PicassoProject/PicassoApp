@@ -7,48 +7,66 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/RESPONSE" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:orientation="horizontal"
+        android:elevation="4dp"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_gravity="left"
+            android:layout_weight="2.5"
+            android:elevation="4dp"
+            android:text="" />
         <!-- this might be deleted or changed because
         we might not need all the buttons -->
         <!--new image button-->
         <ImageButton
             android:id="@+id/new_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="fill_parent"
             android:contentDescription="@string/start_new"
+            android:elevation="4dp"
             android:src="@drawable/new_pic" />
         <!--brush button-->
         <ImageButton
             android:id="@+id/draw_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/brush"
+            android:elevation="4dp"
             android:src="@drawable/brush" />
         <!--ereaser button -->
         <ImageButton
             android:id="@+id/erase_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/erase"
+            android:elevation="4dp"
             android:src="@drawable/eraser" />
         <!--save button-->
         <ImageButton
             android:id="@+id/save_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:contentDescription="@string/save"
+            android:elevation="4dp"
             android:src="@drawable/save" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="0dp"
+            android:layout_weight="2.5"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
     </LinearLayout>
     <picasso.picassoapp.DrawingView
         android:id="@+id/drawing"

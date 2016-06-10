@@ -3,6 +3,7 @@ package picasso.picassoapp.API;
 import java.util.List;
 
 import picasso.picassoapp.models.CallbackJson;
+import picasso.picassoapp.models.SimpleCallback;
 import retrofit.Callback;
 
 import picasso.picassoapp.models.Drawing;
@@ -19,11 +20,18 @@ public interface DrawingAPI
     @POST("/store")
     void postDrawing(@Body Drawing message, Callback<CallbackJson> response);
 
+    @POST("/drawStored")
+    void drawStored(@Body Drawing name, Callback<SimpleCallback> response);
+
     //TODO: add a specific response server side to be able to test properly
     @GET("/test")
     void getResponse(Callback<String> response);
 
     //TODO: ADD this to the server and change the callback so it's a list of drawings I guess
-    @GET("/drawingList")
+    @GET("/list")
     void getDrawingList(Callback<List<Drawing>> response);
+
+    //to delete everything
+    @GET("/deleteAll")
+    void deleteAll(Callback<String> response);
 }

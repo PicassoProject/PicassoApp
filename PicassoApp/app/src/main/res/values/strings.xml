@@ -6,5 +6,6 @@
     <string name="erase">Erase</string>
     <string name="save">Save</string>
     <string name="paint">Paint</string>
+    <string name="show_list">Drawings</string>
 
 </resources>

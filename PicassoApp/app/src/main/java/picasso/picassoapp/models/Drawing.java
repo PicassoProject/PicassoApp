@@ -17,6 +17,13 @@ public class Drawing
         coord = new ArrayList<>();
     }
 
+    public Drawing(String name)
+    {
+        this.name = name;
+        coord = new ArrayList<>();
+        coord.add(new Coordinates(0,0));
+    }
+
     public void copyDrawing(Drawing copy)
     {
         this.name = copy.getName();

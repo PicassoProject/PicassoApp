@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/new_btn"
+        android:icon="@drawable/new_pic"
+        android:title="@string/start_new"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/draw_btn"
+        android:icon="@drawable/brush"
+        android:title="@string/brush"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/erase_btn"
+        android:icon="@drawable/eraser"
+        android:title="@string/erase"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/save_btn"
+        android:icon="@drawable/save"
+        android:title="@string/save"
+        app:showAsAction="always"/>
+
+    <!-- Settings, should always be in the overflow -->
+    <item android:id="@+id/show_list"
+        android:title="@string/show_list"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+        android:title="meh"
+        app:showAsAction="never"/>
+
+</menu>

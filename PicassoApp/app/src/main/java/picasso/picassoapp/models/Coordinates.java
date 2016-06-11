@@ -5,6 +5,7 @@ package picasso.picassoapp.models;
  */
 public class Coordinates
 {
+    //class to store all the points
     private float x;
     private float y;
 

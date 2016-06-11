@@ -6,6 +6,7 @@ package picasso.picassoapp.models;
  */
 public class CallbackJson
 {
+    //simple class that is used to store the response from the server API
     private String status;
     private String name;
     private String cordinates;

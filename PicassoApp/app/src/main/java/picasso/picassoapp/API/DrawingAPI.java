@@ -14,6 +14,7 @@ import retrofit.http.POST;
 /**
  * Created by jl on 4/5/16.
  */
+//this is the retrofit interface, they basically are all the possible routes i can do http requests to.
 public interface DrawingAPI
 {
     //TODO: add a model for the Callback response to know exactly what im gonna get

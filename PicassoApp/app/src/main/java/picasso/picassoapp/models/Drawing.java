@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class Drawing
 {
+    //this is the drawing class, where all the drawings are stored and sent
     private String name;
     private List<Coordinates> coord;
 

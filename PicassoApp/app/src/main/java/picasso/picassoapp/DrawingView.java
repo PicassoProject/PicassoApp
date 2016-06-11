@@ -62,6 +62,7 @@ public class DrawingView extends View
 
     }
 
+    //this method is not used for now
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh)
     {
@@ -71,6 +72,7 @@ public class DrawingView extends View
         drawCanvas = new Canvas(canvasBitmap);
     }
 
+
     @Override
     protected void onDraw(Canvas canvas)
     {
@@ -79,6 +81,8 @@ public class DrawingView extends View
         canvas.drawPath(drawPath, drawPaint);
     }
 
+    //this method receives the input from the user and makes paths and draws said path on the screen
+    //it also saves the paths on a list of coordinates
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -103,11 +107,12 @@ public class DrawingView extends View
             default:
                 return false;
         }
-
+        //invalidate redraws the screen so that the path appears
         invalidate();
         return true;
     }
 
+    //this clears the drawing
     public void deleteEverything()
     {
         saved.delete();
@@ -116,6 +121,7 @@ public class DrawingView extends View
         invalidate();  
     }
 
+    //changes color for the paint
     public void setColor(String newColor)
     {
         //sets color

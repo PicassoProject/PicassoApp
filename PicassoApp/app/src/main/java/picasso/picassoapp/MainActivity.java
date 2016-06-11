@@ -7,14 +7,12 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-//import android.os.Build.VERSION;
 
 //app imports
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,10 +37,12 @@ import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity
 {
+    /*
+        declaration of the visible objects of the applications
+        and other useful variables
+     */
     private DrawingView drawView;
     private ImageButton currPaint;
-    //private ImageButton saveButton;
-    //private ImageButton delButton;
     private TextView text;
     private String name = "new_drawing";
     private boolean pressedYes = false;
@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity
     private boolean selectedPostDrawing = false;
     private String nameToDraw;
 
-    //TODO: FIND A WAY TO CLEAR THE DRAWING
+    //this is the main method that gets called
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //this takes care of the toolbar for the applications
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         ActionBar bla = getSupportActionBar();
@@ -64,10 +65,6 @@ public class MainActivity extends AppCompatActivity
 
         //this instantiates our drawing view class on our actual gui view named drawing in this case
         drawView = (DrawingView)findViewById(R.id.drawing);
-        //delButton = (ImageButton)findViewById(R.id.erase_btn);
-        //saveButton = (ImageButton)findViewById(R.id.save_btn);
-
-        //text = (TextView) findViewById(R.id.RESPONSE);
 
         //retrieves the first paint color thingy
         LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
@@ -86,6 +83,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //this handles how the menu's are used, takes information from the xml that defines the style
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
+    //this is the method that acts whenever one of the toolbar buttons are clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -103,14 +101,12 @@ public class MainActivity extends AppCompatActivity
                 return true;
 
             case R.id.erase_btn:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                //this deletes the current drawing and resets the name to new_drawing
                 name = "new_drawing";
                 drawView.deleteEverything();
                 return true;
             case R.id.draw_btn:
-                //
-                //
+                //this sends a drawing that's already on the server and sends it to the server API
                 if(selectedPostDrawing)
                 {
                     retroCall(nameToDraw);
@@ -118,12 +114,11 @@ public class MainActivity extends AppCompatActivity
                 }
                 return true;
             case R.id.new_btn:
-                //
-                //
-                Log.d("MIO","what the actual fuck");
+                //this let's you choose what name to give the drawing
                 obtainName();
                 return true;
             case R.id.save_btn:
+                //this is the main method to send the current drawing into the server API
                 if(pressedYes)
                 {
                     String API = "https://infinite-brushlands-67485.herokuapp.com";
@@ -142,6 +137,7 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void failure(RetrofitError error) {
                             //it failed
+                            Toast.makeText(MainActivity.this, "nothing?",Toast.LENGTH_SHORT).show();
                         }
                     });
                     pressedYes = false;
@@ -149,7 +145,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
 
             case R.id.show_list:
-                // this make a get from retrofit and show a list etc. blablabl
+                // this shows you a list of previously stored drawings (drawings are stored in the server API)
                 String url = "https://infinite-brushlands-67485.herokuapp.com";
                 RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
                 DrawingAPI api;
@@ -188,7 +184,6 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
                 return true;
-
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -197,6 +192,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //this method asks for an input for a name to save your current drawing with
     public void obtainName()
     {
         boolean answer = false;
@@ -204,10 +200,9 @@ public class MainActivity extends AppCompatActivity
         builder.setTitle("Title");
         // Set up the input
         final EditText input = new EditText(this);
-        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        // Specify the type of input expected
         input.setInputType(InputType.TYPE_CLASS_TEXT); //| InputType.TYPE_TEXT_VARIATION_PASSWORD);
         builder.setView(input);
-        //builder.show();
         // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -225,9 +220,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
         builder.show();
-        //return answer;
     }
 
+    //this changes the color of the paint to the one you selected
     public void paintClicked(View view)
     {
         //use chosen color
@@ -254,6 +249,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    //this is the method that sends a name to the server (the name is already on the servers) to request drawing it
     public void retroCall(String name)
     {
         String url = "https://infinite-brushlands-67485.herokuapp.com";
